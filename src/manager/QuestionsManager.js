@@ -9,7 +9,7 @@ class QuestionsManager {
 
     getAllQuestionsHtml(){
         let htmlData = [];
-        let state = this.apiCaller.getEndpointState("");
+        let state = this.apiCaller.getEndpointState("https://localhost:44329/api/questions");
         state.map(question =>
             htmlData.push(this.questionParser.createRenderData(question))
         );
