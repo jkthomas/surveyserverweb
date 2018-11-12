@@ -28,25 +28,30 @@ class App extends Component {
             .catch(error => console.log(error));
     }
 
-    renderNextQuestion(){
+    renderNextQuestion() {
         this.currentQuestion += 1;
         this.forceUpdate()
     }
 
-    getInputType(questionTypeNumber){
+    getInputType(questionTypeNumber) {
         switch (questionTypeNumber) {
-            case QuestionType.Undefined: return null;
-            case QuestionType.YesNo: return "radio";
-            case QuestionType.Closed: return "radio";
-            case QuestionType.Opened: return "text";
-            case QuestionType.Multiple: return "checkbox";
-            default: return null
+            case QuestionType.Undefined:
+                return null;
+            case QuestionType.YesNo:
+                return "radio";
+            case QuestionType.Closed:
+                return "radio";
+            case QuestionType.Opened:
+                return "text";
+            case QuestionType.Multiple:
+                return "checkbox";
+            default:
+                return null
         }
     }
 
     render() {
         const {questions} = this.state;
-
         if (questions == null) {
             return <MessageProvider message={MessageEnum.Loading}/>
         }
@@ -54,14 +59,23 @@ class App extends Component {
         if (this.currentQuestion < 0 || this.currentQuestion > questions.length - 1) {
             return <MessageProvider message={MessageEnum.End}/>
         }
+
         const questionTypeNumber = this.state.questions[this.currentQuestion].type;
         const repliesType = this.getInputType(questionTypeNumber);
+
         return (
             <div>
                 <h2>{this.state.questions[this.currentQuestion].content}</h2>
-                {this.state.questions[this.currentQuestion].replies.map(reply =>
-                    <p>{reply.content}</p>
-                )}
+                <form>
+                    {this.state.questions[this.currentQuestion].replies.map(reply => {
+                            let renderData = [];
+                            renderData.push(<input type={repliesType} value={reply.content}/>);
+                            renderData.push(reply.content);
+                            renderData.push(<br/>);
+                            return renderData
+                        }
+                    )}
+                </form>
                 <button className="nextQuestion" onClick={this.renderNextQuestion}>Next question</button>
             </div>
         );
