@@ -3,6 +3,7 @@ import './App.css';
 import MessageProvider from "./message/MessageProvider";
 import MessageEnum from "./enum/Messages";
 import QuestionType from "./enum/QuestionType";
+import Answer from "./entity/Answer";
 
 class App extends Component {
 
@@ -14,6 +15,7 @@ class App extends Component {
         };
 
         this.currentQuestion = 0;
+        this.answers = [];
         this.renderNextQuestion = this.renderNextQuestion.bind(this);
     }
 
@@ -28,10 +30,17 @@ class App extends Component {
             .catch(error => console.log(error));
     }
 
-    renderNextQuestion() {
+    handleAnswerSubmitting = (e) => {
+        const {question} = this.state.questions[this.currentQuestion];
+        const currentAnswer = new Answer(
+            question.id,
+            question.type,
+
+        );
+        this.answers.push(currentAnswer);
         this.currentQuestion += 1;
         this.forceUpdate()
-    }
+    };
 
     getInputType(questionTypeNumber) {
         switch (questionTypeNumber) {
@@ -66,7 +75,7 @@ class App extends Component {
         return (
             <div>
                 <h2>{this.state.questions[this.currentQuestion].content}</h2>
-                <form>
+                <form onSubmit={this.handleAnswerSubmitting}>
                     {this.state.questions[this.currentQuestion].replies.map(reply => {
                             let renderData = [];
                             renderData.push(<input type={repliesType} value={reply.content}/>);
@@ -76,6 +85,7 @@ class App extends Component {
                         }
                     )}
                 </form>
+                TODO: Manage assigning values to answers array with onChange property
                 <button className="nextQuestion" onClick={this.renderNextQuestion}>Next question</button>
             </div>
         );
