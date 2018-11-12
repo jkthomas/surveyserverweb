@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import './App.css';
 import MessageProvider from "./message/MessageProvider";
 import MessageEnum from "./enum/Messages";
+import QuestionType from "./enum/QuestionType";
 
 class App extends Component {
 
@@ -32,6 +33,17 @@ class App extends Component {
         this.forceUpdate()
     }
 
+    getInputType(questionTypeNumber){
+        switch (questionTypeNumber) {
+            case QuestionType.Undefined: return null;
+            case QuestionType.YesNo: return "radio";
+            case QuestionType.Closed: return "radio";
+            case QuestionType.Opened: return "text";
+            case QuestionType.Multiple: return "checkbox";
+            default: return null
+        }
+    }
+
     render() {
         const {questions} = this.state;
 
@@ -42,7 +54,8 @@ class App extends Component {
         if (this.currentQuestion < 0 || this.currentQuestion > questions.length - 1) {
             return <MessageProvider message={MessageEnum.End}/>
         }
-
+        const questionTypeNumber = this.state.questions[this.currentQuestion].type;
+        const repliesType = this.getInputType(questionTypeNumber);
         return (
             <div>
                 <h2>{this.state.questions[this.currentQuestion].content}</h2>
