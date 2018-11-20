@@ -4,11 +4,9 @@ import MessageProvider from "./message/MessageProvider";
 import QuestionManager from "./question/QuestionManager"
 import MessageEnum from "./enum/Messages";
 //import QuestionType from "./enum/QuestionType";
-//import Answer from "./entity/Answer";
+//import ReplyManager from "./entity/ReplyManager";
 
 class App extends Component {
-
-
     constructor(props) {
         super(props);
         this.state = {
@@ -18,6 +16,11 @@ class App extends Component {
         this.currentQuestion = 0;
         //this.answers = [];
         //this.renderNextQuestion = this.renderNextQuestion.bind(this);
+    }
+
+    handleClick(){
+        this.currentQuestion += 1;
+        this.forceUpdate();
     }
 
     componentDidMount() {
@@ -33,7 +36,7 @@ class App extends Component {
 
     // handleAnswerSubmitting = (e) => {
     //     const {question} = this.state.questions[this.currentQuestion];
-    //     const currentAnswer = new Answer(
+    //     const currentAnswer = new ReplyManager(
     //         question.id,
     //         question.type,
     //
@@ -75,7 +78,7 @@ class App extends Component {
 
         return (
             <div>
-                <QuestionManager questionContent={this.state.questions[this.currentQuestion]} />
+                <QuestionManager question={this.state.questions[this.currentQuestion]} buttonClick={() => {this.handleClick()}}/>
             </div>
         );
     }
