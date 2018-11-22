@@ -9,7 +9,7 @@ class CheckboxReply extends Component {
 
     handleSubmit(e) {
         e.preventDefault();
-        this.props.handleAnswerSubmit();
+        this.props.handleSingleAnswerSubmit();
     }
 
     render() {

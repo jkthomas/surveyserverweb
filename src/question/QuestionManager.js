@@ -12,25 +12,25 @@ class QuestionManager extends Component {
             case 1:
                 return (
                     <RadioReply replies={this.props.question.replies}
-                                handleAnswerSubmit={this.props.handleAnswerSubmit}/>
+                                handleSingleAnswerSubmit={this.props.handleSingleAnswerSubmit}/>
                 );
             case 2:
                 return (
                     <RadioReply replies={this.props.question.replies}
-                                handleAnswerSubmit={this.props.handleAnswerSubmit}/>
+                                handleSingleAnswerSubmit={this.props.handleSingleAnswerSubmit}/>
                 );
             case 3:
                 return (
-                    <OpenReply handleAnswerSubmit={this.props.handleAnswerSubmit}/>
+                    <OpenReply handleSingleAnswerSubmit={this.props.handleSingleAnswerSubmit}/>
                 );
             case 4:
                 return (
                     <CheckboxReply replies={this.props.question.replies}
-                                   handleAnswerSubmit={this.props.handleAnswerSubmit}/>
+                                   handleSingleAnswerSubmit={this.props.handleSingleAnswerSubmit}/>
                 );
             default:
                 return (
-                    <MessageProvider message={MessageEnum.Error}/>
+                    <MessageProvider message={MessageEnum.ReplyLoadingError}/>
                 );
         }
     }

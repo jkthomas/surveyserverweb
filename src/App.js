@@ -23,10 +23,10 @@ class App extends Component {
             })
             .catch(error => console.log(error));
 
-        this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleSingleAnswerSubmit = this.handleSingleAnswerSubmit.bind(this);
     }
 
-    handleSubmit() {
+    handleSingleAnswerSubmit() {
         this.setState(
             prevState => {
                 return {currentQuestion: prevState.currentQuestion + 1}
@@ -40,13 +40,20 @@ class App extends Component {
         }
 
         if (this.state.questions[this.state.currentQuestion] === undefined) {
-            return <MessageProvider message={MessageEnum.End}/>
+            if(this.state.currentQuestion !== 0){
+                return([
+                    <MessageProvider message={MessageEnum.End}/>,
+                    <button> Zapisz odpowiedzi </button>
+                ])
+            } else {
+                return <MessageProvider message={MessageEnum.GeneralError}/>
+            }
         }
 
         return (
             <div>
                 <QuestionManager question={this.state.questions[this.state.currentQuestion]}
-                                 handleAnswerSubmit={this.handleSubmit}/>
+                                 handleSingleAnswerSubmit={this.handleSingleAnswerSubmit}/>
             </div>
         );
     }
