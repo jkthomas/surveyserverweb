@@ -24,9 +24,27 @@ class App extends Component {
             .catch(error => console.log(error));
 
         this.handleSingleAnswerSubmit = this.handleSingleAnswerSubmit.bind(this);
+        this.incrementCurrentQuestion = this.incrementCurrentQuestion.bind(this);
     }
 
-    handleSingleAnswerSubmit() {
+    handleCheckboxAnswersSubmit(answers){
+        //TODO: Implement
+    }
+
+    handleRadioAnswerSubmit(answer){
+        //TODO: Implement
+    }
+
+    handleOpenAnswerSubmit(answer){
+        //TODO: Implement
+    }
+
+    handleSingleAnswerSubmit(answer) {
+        console.log(answer);
+        this.incrementCurrentQuestion();
+    }
+
+    incrementCurrentQuestion(){
         this.setState(
             prevState => {
                 return {currentQuestion: prevState.currentQuestion + 1}
@@ -36,23 +54,23 @@ class App extends Component {
 
     render() {
         if (this.state.questions == null) {
-            return <MessageProvider message={MessageEnum.Loading}/>
+            return <MessageProvider key='msgProvider' message={MessageEnum.Loading}/>
         }
 
         if (this.state.questions[this.state.currentQuestion] === undefined) {
             if(this.state.currentQuestion !== 0){
                 return([
-                    <MessageProvider message={MessageEnum.End}/>,
-                    <button> Zapisz odpowiedzi </button>
+                    <MessageProvider key='msgProvider' message={MessageEnum.End}/>,
+                    <button key={'saveButton'}> Zapisz odpowiedzi </button>
                 ])
             } else {
-                return <MessageProvider message={MessageEnum.GeneralError}/>
+                return <MessageProvider key='msgProvider' message={MessageEnum.GeneralError}/>
             }
         }
 
         return (
             <div>
-                <QuestionManager question={this.state.questions[this.state.currentQuestion]}
+                <QuestionManager key='questionManager' question={this.state.questions[this.state.currentQuestion]}
                                  handleSingleAnswerSubmit={this.handleSingleAnswerSubmit}/>
             </div>
         );

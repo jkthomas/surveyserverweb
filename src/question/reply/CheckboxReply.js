@@ -31,25 +31,23 @@ class CheckboxReply extends Component {
     handleSubmit(event) {
         event.preventDefault();
         //TODO: Logging for testing purposes only
-        console.log(this.state.checkedOptions.toString());
+        //console.log(this.state.checkedOptions.toString());
         //
-        this.props.handleSingleAnswerSubmit();
+        this.props.handleSingleAnswerSubmit(this.state.checkedOptions[0].toString());
     }
 
     render() {
         const replies = this.props.replies.map((reply) => {
-            return (
-                <form>
-                    <input key={reply.id} type="checkbox" value={reply.id} onChange={event => this.handleChange(event)}/>
-                    {reply.content}
-                    <br/>
-                </form>
-            )
+            return ([
+                <input key={reply.id} type="checkbox" value={reply.id} onChange={event => this.handleChange(event)}/>,
+                <label key='content'>{reply.content}</label>,
+                <br key='breakline'/>
+            ])
         });
         return (
-            <form onSubmit={this.handleSubmit}>
+            <form key='form' onSubmit={this.handleSubmit}>
                 {replies}
-                <input type="submit"/>
+                <input key='submit' type="submit"/>
             </form>)
     }
 }

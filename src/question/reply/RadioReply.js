@@ -23,27 +23,26 @@ class RadioReply extends Component {
     handleSubmit(event) {
         event.preventDefault();
         //TODO: Logging for testing purposes only
-        console.log(this.state.pickedOption.toString());
+        //console.log(this.state.pickedOption.toString());
         //
-        this.props.handleSingleAnswerSubmit();
+        this.props.handleSingleAnswerSubmit(this.state.pickedOption.toString());
     }
 
     render() {
         const currentlyPickedOption = this.state.pickedOption;
         const replies = this.props.replies.map((reply) => {
-            return (
-                <form>
-                    <input key={reply.id} type="radio" value={reply.id}
-                           checked={currentlyPickedOption === reply.id.toString()} onChange={event => this.handleChange(event)}/>
-                    {reply.content}
-                    <br/>
-                </form>
-            )
+            return ([
+                <input key={reply.id} type="radio" value={reply.id}
+                       checked={currentlyPickedOption === reply.id.toString()}
+                       onChange={event => this.handleChange(event)}/>,
+                <label key='content'>{reply.content}</label>,
+                <br key='breakline'/>
+            ])
         });
         return (
-            <form onSubmit={this.handleSubmit}>
+            <form key='form' onSubmit={this.handleSubmit}>
                 {replies}
-                <input type="submit"/>
+                <input key='submit' type="submit"/>
             </form>)
     }
 }

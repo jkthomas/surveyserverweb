@@ -21,9 +21,9 @@ class OpenReply extends Component {
     handleSubmit(event) {
         event.preventDefault();
         //TODO: Logging for testing purposes only
-        console.log(this.state.answer.toString());
+        //console.log(this.state.answer.toString());
         //
-        this.props.handleSingleAnswerSubmit();
+        this.props.handleSingleAnswerSubmit(this.state.answer);
     }
 
     render() {
