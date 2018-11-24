@@ -11,8 +11,8 @@ class RadioReply extends Component {
         this.handleChange = this.handleChange.bind(this);
     }
 
-    handleChange(e) {
-        let checkedOption = e.target;
+    handleChange(event) {
+        let checkedOption = event.target;
         if (checkedOption.checked) {
             this.setState({
                 pickedOption: checkedOption.value
@@ -20,9 +20,11 @@ class RadioReply extends Component {
         }
     }
 
-    handleSubmit(e) {
-        e.preventDefault();
+    handleSubmit(event) {
+        event.preventDefault();
+        //TODO: Logging for testing purposes only
         console.log(this.state.pickedOption.toString());
+        //
         this.props.handleSingleAnswerSubmit();
     }
 
@@ -32,7 +34,7 @@ class RadioReply extends Component {
             return (
                 <form>
                     <input key={reply.id} type="radio" value={reply.id}
-                           checked={currentlyPickedOption === reply.id.toString()} onChange={e => this.handleChange(e)}/>
+                           checked={currentlyPickedOption === reply.id.toString()} onChange={event => this.handleChange(event)}/>
                     {reply.content}
                     <br/>
                 </form>

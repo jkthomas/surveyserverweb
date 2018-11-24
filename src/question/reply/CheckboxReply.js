@@ -11,8 +11,8 @@ class CheckboxReply extends Component {
         this.handleChange = this.handleChange.bind(this);
     }
 
-    handleChange(e) {
-        let checkedOption = e.target;
+    handleChange(event) {
+        let checkedOption = event.target;
         if (checkedOption.checked) {
             this.setState(
                 prevState => ({
@@ -28,8 +28,8 @@ class CheckboxReply extends Component {
         }
     }
 
-    handleSubmit(e) {
-        e.preventDefault();
+    handleSubmit(event) {
+        event.preventDefault();
         //TODO: Logging for testing purposes only
         console.log(this.state.checkedOptions.toString());
         //
@@ -40,7 +40,7 @@ class CheckboxReply extends Component {
         const replies = this.props.replies.map((reply) => {
             return (
                 <form>
-                    <input key={reply.id} type="checkbox" value={reply.id} onChange={e => this.handleChange(e)}/>
+                    <input key={reply.id} type="checkbox" value={reply.id} onChange={event => this.handleChange(event)}/>
                     {reply.content}
                     <br/>
                 </form>
