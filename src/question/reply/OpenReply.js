@@ -33,7 +33,7 @@ class OpenReply extends Component {
     render() {
         return (
             <form onSubmit={this.handleSubmit} onChange={event => this.handleChange(event)}>
-                <input type="text" value={this.state.answer}/>
+                <input type="text"/>
                 <input type="submit"/>
             </form>)
     }

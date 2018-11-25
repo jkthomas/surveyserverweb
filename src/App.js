@@ -14,7 +14,7 @@ class App extends Component {
             answers: []
         };
 
-        fetch("")
+        fetch("https://localhost:44329/api/questions")
             .then(response => response.json())
             .then(response => {
                 this.setState({
@@ -28,6 +28,7 @@ class App extends Component {
         this.handleRadioAnswerSubmit = this.handleRadioAnswerSubmit.bind(this);
         this.handleOpenAnswerSubmit = this.handleOpenAnswerSubmit.bind(this);
         this.incrementCurrentQuestion = this.incrementCurrentQuestion.bind(this);
+        this.saveAnswers = this.saveAnswers.bind(this);
     }
 
     handleCheckboxAnswersSubmit(answers){
@@ -65,6 +66,19 @@ class App extends Component {
         );
     }
 
+    saveAnswers(){
+        console.log("Starting POST>:...");
+        fetch("https://localhost:44329/api/answers", {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(this.state.answers)
+        });
+        console.log("ENDING POST>:...");
+    }
+
     render() {
         if (this.state.questions == null) {
             return <MessageProvider key='msgProvider' message={MessageEnum.Loading}/>
@@ -74,7 +88,7 @@ class App extends Component {
             if(this.state.currentQuestion !== 0){
                 return([
                     <MessageProvider key='msgProvider' message={MessageEnum.End}/>,
-                    <button key={'saveButton'}> Zapisz odpowiedzi </button>
+                    <button key={'saveButton'} onClick={this.saveAnswers}> Zapisz odpowiedzi </button>
                 ])
             } else {
                 return <MessageProvider key='msgProvider' message={MessageEnum.GeneralError}/>
