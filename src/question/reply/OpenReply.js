@@ -23,13 +23,17 @@ class OpenReply extends Component {
         //TODO: Logging for testing purposes only
         //console.log(this.state.answer.toString());
         //
-        this.props.handleSingleAnswerSubmit(this.state.answer);
+        const answer = {
+            questionId: this.props.questionId,
+            replyId: 7, // replyId that matches database id in replies table
+            replyContent:this.state.answer.toString()};
+        this.props.handleOpenAnswerSubmit(answer);
     }
 
     render() {
         return (
             <form onSubmit={this.handleSubmit} onChange={event => this.handleChange(event)}>
-                <input type="text"/>
+                <input type="text" value={this.state.answer}/>
                 <input type="submit"/>
             </form>)
     }

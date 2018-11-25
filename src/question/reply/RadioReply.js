@@ -4,18 +4,20 @@ class RadioReply extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            pickedOption: this.props.replies[0].id.toString()
+            pickedOptionId: this.props.replies[0].id.toString(),
+            pickedOptionContent: this.props.replies[0].content.toString()
         };
 
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleChange = this.handleChange.bind(this);
     }
 
-    handleChange(event) {
+    handleChange(event, replyContent) {
         let checkedOption = event.target;
         if (checkedOption.checked) {
             this.setState({
-                pickedOption: checkedOption.value
+                pickedOptionId: checkedOption.value,
+                pickedOptionContent: replyContent
             })
         }
     }
@@ -23,18 +25,22 @@ class RadioReply extends Component {
     handleSubmit(event) {
         event.preventDefault();
         //TODO: Logging for testing purposes only
-        //console.log(this.state.pickedOption.toString());
+        //console.log(this.state.pickedOptionId.toString());
         //
-        this.props.handleSingleAnswerSubmit(this.state.pickedOption.toString());
+        const answer = {
+            questionId: this.props.questionId,
+            replyId: parseInt(this.state.pickedOptionId),
+            replyContent:this.state.pickedOptionContent.toString()};
+        this.props.handleRadioAnswerSubmit(answer);
     }
 
     render() {
-        const currentlyPickedOption = this.state.pickedOption;
+        const currentlyPickedOption = this.state.pickedOptionId;
         const replies = this.props.replies.map((reply) => {
             return ([
                 <input key={reply.id} type="radio" value={reply.id}
                        checked={currentlyPickedOption === reply.id.toString()}
-                       onChange={event => this.handleChange(event)}/>,
+                       onChange={event => this.handleChange(event, reply.content)}/>,
                 <label key='content'>{reply.content}</label>,
                 <br key='breakline'/>
             ])

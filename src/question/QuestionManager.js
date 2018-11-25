@@ -11,26 +11,34 @@ class QuestionManager extends Component {
         switch (inputType) {
             case 1:
                 return (
-                    <RadioReply replies={this.props.question.replies}
-                                handleSingleAnswerSubmit={this.props.handleSingleAnswerSubmit}/>
+                    <RadioReply key={this.props.question.id}
+                                replies={this.props.question.replies}
+                                questionId={this.props.question.id}
+                                handleRadioAnswerSubmit={this.props.handleRadioAnswerSubmit}/>
                 );
             case 2:
                 return (
-                    <RadioReply replies={this.props.question.replies}
-                                handleSingleAnswerSubmit={this.props.handleSingleAnswerSubmit}/>
+                    <RadioReply key={this.props.question.id}
+                                replies={this.props.question.replies}
+                                questionId={this.props.question.id}
+                                handleRadioAnswerSubmit={this.props.handleRadioAnswerSubmit}/>
                 );
             case 3:
                 return (
-                    <OpenReply handleSingleAnswerSubmit={this.props.handleSingleAnswerSubmit}/>
+                    <OpenReply key={this.props.question.id}
+                               handleOpenAnswerSubmit={this.props.handleOpenAnswerSubmit}
+                               questionId={this.props.question.id}/>
                 );
             case 4:
                 return (
-                    <CheckboxReply replies={this.props.question.replies}
-                                   handleSingleAnswerSubmit={this.props.handleSingleAnswerSubmit}/>
+                    <CheckboxReply key={this.props.question.id}
+                                   replies={this.props.question.replies}
+                                   questionId={this.props.question.id}
+                                   handleCheckboxAnswersSubmit={this.props.handleCheckboxAnswersSubmit}/>
                 );
             default:
                 return (
-                    <MessageProvider message={MessageEnum.ReplyLoadingError}/>
+                    <MessageProvider key='msgProvider' message={MessageEnum.ReplyLoadingError}/>
                 );
         }
     }

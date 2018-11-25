@@ -10,7 +10,8 @@ class App extends Component {
         this.state = {
             questions: null,
             currentQuestion: null,
-            questionsLength: null
+            questionsLength: null,
+            answers: []
         };
 
         fetch("")
@@ -23,24 +24,36 @@ class App extends Component {
             })
             .catch(error => console.log(error));
 
-        this.handleSingleAnswerSubmit = this.handleSingleAnswerSubmit.bind(this);
+        this.handleCheckboxAnswersSubmit = this.handleCheckboxAnswersSubmit.bind(this);
+        this.handleRadioAnswerSubmit = this.handleRadioAnswerSubmit.bind(this);
+        this.handleOpenAnswerSubmit = this.handleOpenAnswerSubmit.bind(this);
         this.incrementCurrentQuestion = this.incrementCurrentQuestion.bind(this);
     }
 
     handleCheckboxAnswersSubmit(answers){
-        //TODO: Implement
+        this.setState(
+            prevState => ({
+                answers: [...prevState.answers, ...answers]
+            })
+        );
+        this.incrementCurrentQuestion();
     }
 
     handleRadioAnswerSubmit(answer){
-        //TODO: Implement
+        this.setState(
+            prevState => ({
+                answers: [...prevState.answers, answer]
+            })
+        );
+        this.incrementCurrentQuestion();
     }
 
     handleOpenAnswerSubmit(answer){
-        //TODO: Implement
-    }
-
-    handleSingleAnswerSubmit(answer) {
-        console.log(answer);
+        this.setState(
+            prevState => ({
+                answers: [...prevState.answers, answer]
+            })
+        );
         this.incrementCurrentQuestion();
     }
 
@@ -71,7 +84,10 @@ class App extends Component {
         return (
             <div>
                 <QuestionManager key='questionManager' question={this.state.questions[this.state.currentQuestion]}
-                                 handleSingleAnswerSubmit={this.handleSingleAnswerSubmit}/>
+                                 handleCheckboxAnswersSubmit={this.handleCheckboxAnswersSubmit}
+                                 handleRadioAnswerSubmit={this.handleRadioAnswerSubmit}
+                                 handleOpenAnswerSubmit={this.handleOpenAnswerSubmit}
+                />
             </div>
         );
     }

@@ -4,25 +4,28 @@ class CheckboxReply extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            checkedOptions: []
+            checkedOptionsIds: [],
+            checkedOptionsContent: []
         };
 
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleChange = this.handleChange.bind(this);
     }
 
-    handleChange(event) {
+    handleChange(event, replyContent) {
         let checkedOption = event.target;
         if (checkedOption.checked) {
             this.setState(
                 prevState => ({
-                    checkedOptions: [...prevState.checkedOptions, checkedOption.value]
+                    checkedOptionsIds: [...prevState.checkedOptionsIds, parseInt(checkedOption.value)],
+                    checkedOptionsContent: [...prevState.checkedOptionsContent, replyContent]
                 })
             )
         } else {
             this.setState(
                 prevState => ({
-                    checkedOptions: prevState.checkedOptions.filter((x, value) => value === checkedOption.value)
+                    checkedOptionsIds: prevState.checkedOptionsIds.filter((x, value) => value === checkedOption.value),
+                    checkedOptionsContent: prevState.checkedOptionsContent.filter((x, content) => content === replyContent)
                 })
             )
         }
@@ -31,15 +34,25 @@ class CheckboxReply extends Component {
     handleSubmit(event) {
         event.preventDefault();
         //TODO: Logging for testing purposes only
-        //console.log(this.state.checkedOptions.toString());
+        //console.log(this.state.checkedOptionsIds.toString());
         //
-        this.props.handleSingleAnswerSubmit(this.state.checkedOptions[0].toString());
+        const answers = [];
+        for (let i=0; i < this.state.checkedOptionsIds.length; i++){
+            answers.push({
+                questionId: this.props.questionId,
+                replyId: this.state.checkedOptionsIds[i],
+                replyContent: this.state.checkedOptionsContent[i].toString()
+            })
+        }
+
+        this.props.handleCheckboxAnswersSubmit(answers);
     }
 
     render() {
         const replies = this.props.replies.map((reply) => {
             return ([
-                <input key={reply.id} type="checkbox" value={reply.id} onChange={event => this.handleChange(event)}/>,
+                <input key={reply.id} type="checkbox" value={reply.id}
+                       onChange={event => this.handleChange(event, reply.content)}/>,
                 <label key='content'>{reply.content}</label>,
                 <br key='breakline'/>
             ])
