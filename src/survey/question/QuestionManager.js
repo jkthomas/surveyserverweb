@@ -1,8 +1,8 @@
 import React, {Component} from "react";
 import RadioReply from "./reply/RadioReply";
 import OpenReply from "./reply/OpenReply";
-import MessageProvider from "../message/MessageProvider";
-import MessageEnum from "../enum/Messages";
+import MessageProvider from "../../message/MessageProvider";
+import MessageEnum from "../../enum/Messages";
 import CheckboxReply from "./reply/CheckboxReply";
 
 class QuestionManager extends Component {
