@@ -30,7 +30,7 @@ class SurveyManager extends Component {
         this.saveAnswers = this.saveAnswers.bind(this);
     }
 
-    handleCheckboxAnswersSubmit(answers){
+    handleCheckboxAnswersSubmit(answers) {
         this.setState(
             prevState => ({
                 answers: [...prevState.answers, ...answers]
@@ -39,7 +39,7 @@ class SurveyManager extends Component {
         this.incrementCurrentQuestion();
     }
 
-    handleRadioAnswerSubmit(answer){
+    handleRadioAnswerSubmit(answer) {
         this.setState(
             prevState => ({
                 answers: [...prevState.answers, answer]
@@ -48,7 +48,7 @@ class SurveyManager extends Component {
         this.incrementCurrentQuestion();
     }
 
-    handleOpenAnswerSubmit(answer){
+    handleOpenAnswerSubmit(answer) {
         this.setState(
             prevState => ({
                 answers: [...prevState.answers, answer]
@@ -57,7 +57,7 @@ class SurveyManager extends Component {
         this.incrementCurrentQuestion();
     }
 
-    incrementCurrentQuestion(){
+    incrementCurrentQuestion() {
         this.setState(
             prevState => {
                 return {currentQuestion: prevState.currentQuestion + 1}
@@ -65,8 +65,7 @@ class SurveyManager extends Component {
         );
     }
 
-    saveAnswers(){
-        console.log("Starting POST>:...");
+    saveAnswers() {
         fetch("", {
             method: 'POST',
             headers: {
@@ -75,7 +74,6 @@ class SurveyManager extends Component {
             },
             body: JSON.stringify(this.state.answers)
         });
-        console.log("ENDING POST>:...");
 
         this.props.handleSurveySubmit();
     }
@@ -86,8 +84,8 @@ class SurveyManager extends Component {
         }
 
         if (this.state.questions[this.state.currentQuestion] === undefined) {
-            if(this.state.currentQuestion !== 0){
-                return([
+            if (this.state.currentQuestion !== 0) {
+                return ([
                     <MessageProvider key='msgProvider' message={MessageEnum.End}/>,
                     <button key={'saveButton'} onClick={this.saveAnswers}> Zapisz odpowiedzi </button>
                 ])
@@ -97,13 +95,11 @@ class SurveyManager extends Component {
         }
 
         return (
-            <div>
-                <QuestionManager key='questionManager' question={this.state.questions[this.state.currentQuestion]}
-                                 handleCheckboxAnswersSubmit={this.handleCheckboxAnswersSubmit}
-                                 handleRadioAnswerSubmit={this.handleRadioAnswerSubmit}
-                                 handleOpenAnswerSubmit={this.handleOpenAnswerSubmit}
-                />
-            </div>
+            <QuestionManager key='questionManager' question={this.state.questions[this.state.currentQuestion]}
+                             handleCheckboxAnswersSubmit={this.handleCheckboxAnswersSubmit}
+                             handleRadioAnswerSubmit={this.handleRadioAnswerSubmit}
+                             handleOpenAnswerSubmit={this.handleOpenAnswerSubmit}
+            />
         );
     }
 }

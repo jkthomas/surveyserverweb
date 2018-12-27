@@ -26,9 +26,7 @@ class App extends Component {
             )
         } else {
             return (
-                <div>
-                    <SurveyManager handleSurveySubmit={this.handleSurveySubmit}/>
-                </div>
+                <SurveyManager handleSurveySubmit={this.handleSurveySubmit}/>
             );
         }
     }

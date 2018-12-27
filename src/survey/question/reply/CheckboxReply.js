@@ -37,7 +37,7 @@ class CheckboxReply extends Component {
         //console.log(this.state.checkedOptionsIds.toString());
         //
         const answers = [];
-        for (let i=0; i < this.state.checkedOptionsIds.length; i++){
+        for (let i = 0; i < this.state.checkedOptionsIds.length; i++) {
             answers.push({
                 questionId: this.props.questionId,
                 replyId: this.state.checkedOptionsIds[i],
@@ -51,16 +51,18 @@ class CheckboxReply extends Component {
     render() {
         const replies = this.props.replies.map((reply) => {
             return ([
-                <input key={reply.id} type="checkbox" value={reply.id}
-                       onChange={event => this.handleChange(event, reply.content)}/>,
-                <label key='content'>{reply.content}</label>,
+                <div className="flexOption">
+                    <input className="optionInput" key={reply.id} type="checkbox" value={reply.id}
+                           onChange={event => this.handleChange(event, reply.content)}/>
+                    <label className="optionLabel" key='content'>{reply.content}</label>
+                </div>,
                 <br key='breakline'/>
             ])
         });
         return (
-            <form key='form' onSubmit={this.handleSubmit}>
+            <form className="flexForm" key='form' onSubmit={this.handleSubmit}>
                 {replies}
-                <input key='submit' type="submit"/>
+                <input className="submitButton" key='submit' type="submit"/>
             </form>)
     }
 }

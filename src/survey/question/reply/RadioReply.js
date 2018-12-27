@@ -30,7 +30,8 @@ class RadioReply extends Component {
         const answer = {
             questionId: this.props.questionId,
             replyId: parseInt(this.state.pickedOptionId),
-            replyContent:this.state.pickedOptionContent.toString()};
+            replyContent: this.state.pickedOptionContent.toString()
+        };
         this.props.handleRadioAnswerSubmit(answer);
     }
 
@@ -38,17 +39,19 @@ class RadioReply extends Component {
         const currentlyPickedOption = this.state.pickedOptionId;
         const replies = this.props.replies.map((reply) => {
             return ([
-                <input key={reply.id} type="radio" value={reply.id}
-                       checked={currentlyPickedOption === reply.id.toString()}
-                       onChange={event => this.handleChange(event, reply.content)}/>,
-                <label key='content'>{reply.content}</label>,
+                <div className="flexOption">
+                    <input className="optionInput" key={reply.id} type="radio" value={reply.id}
+                           checked={currentlyPickedOption === reply.id.toString()}
+                           onChange={event => this.handleChange(event, reply.content)}/>
+                    <label className="optionLabel" key='content'>{reply.content}</label>
+                </div>,
                 <br key='breakline'/>
             ])
         });
         return (
-            <form key='form' onSubmit={this.handleSubmit}>
+            <form className="flexForm" key='form' onSubmit={this.handleSubmit}>
                 {replies}
-                <input key='submit' type="submit"/>
+                <input className="submitButton" key='submit' type="submit"/>
             </form>)
     }
 }

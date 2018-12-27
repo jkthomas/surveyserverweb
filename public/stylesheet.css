@@ -1,0 +1,59 @@
+html, body{
+    height: 100%;
+}
+
+#root{
+    height: 100%;
+}
+
+.mainContainer{
+    border: 1px solid red;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-content: space-around;
+    height: 100%;
+}
+
+.questionContent{
+    text-align: center;
+    font-weight: bold;
+    font-size: 200%;
+}
+
+.flexForm{
+    border: 1px solid blue;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    align-content: space-around;
+    flex-wrap: wrap;
+    height: 80%;
+}
+
+.flexOption{
+    border: 1px solid green;
+    width: 100%;
+}
+
+.optionInput{
+    width: 10%;
+}
+
+.optionLabel{
+    width: 90%;
+    font-size: 150%;
+}
+
+.textInput{
+    height: 50%;
+    width: 90%;
+}
+
+.submitButton{
+    width: 30%;
+    height: 10%;
+    margin: 0;
+    padding: 0;
+}
