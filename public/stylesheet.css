@@ -1,5 +1,16 @@
-html, body{
+html{
     height: 100%;
+    font-family: "Comic Sans MS", cursive, sans-serif;
+}
+
+body{
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    background: rgb(157,111,237);
+    background: linear-gradient(135deg, rgba(157,111,237,1) 0%, rgba(172,97,233,1) 50%, rgba(163,42,227,1) 100%);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
 }
 
 #root{
@@ -10,9 +21,14 @@ html, body{
     border: 1px solid red;
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
     align-content: space-around;
     height: 100%;
+}
+
+.questionContainer{
+    background-color: #8585ad;
+    border-radius: 20%;
+    box-shadow: 1px 2px 4px rgba(0, 0, 0, .5), inset 0 0 10px #000000;
 }
 
 .questionContent{
@@ -26,24 +42,27 @@ html, body{
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-around;
-    align-content: space-around;
-    flex-wrap: wrap;
-    height: 80%;
+    flex-wrap: nowrap;
+    animation: fadein 2s;
 }
 
-.flexOption{
+.flexFormContainer{
     border: 1px solid green;
     width: 100%;
 }
 
-.optionInput{
-    width: 10%;
+.pickInput{
+
 }
 
-.optionLabel{
-    width: 90%;
+.pickInput:checked{
+    animation: swell 250ms ease-in;
+}
+
+
+.inputLabel{
     font-size: 150%;
+    text-shadow: 2px 2px pink;
 }
 
 .textInput{
@@ -52,8 +71,24 @@ html, body{
 }
 
 .submitButton{
-    width: 30%;
-    height: 10%;
+    /*width: 30%;*/
     margin: 0;
     padding: 0;
+}
+
+.message{
+    font-size: 200%;
+    text-shadow: 2px 2px pink;
+}
+
+@keyframes swell{
+    0%{transform: scale(0);}
+    25%{transform: scale(1.5);}
+    75%{transform: scale(1.7);}
+    100%{transform: scale(1);}
+}
+
+@keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
 }

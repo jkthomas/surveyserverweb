@@ -51,10 +51,10 @@ class CheckboxReply extends Component {
     render() {
         const replies = this.props.replies.map((reply) => {
             return ([
-                <div className="flexOption">
-                    <input className="optionInput" key={reply.id} type="checkbox" value={reply.id}
+                <div className="flexFormContainer">
+                    <input className="pickInput" key={reply.id} type="checkbox" value={reply.id}
                            onChange={event => this.handleChange(event, reply.content)}/>
-                    <label className="optionLabel" key='content'>{reply.content}</label>
+                    <label className="inputLabel" key='content'>{reply.content}</label>
                 </div>,
                 <br key='breakline'/>
             ])

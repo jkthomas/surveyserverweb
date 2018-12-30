@@ -47,7 +47,9 @@ class QuestionManager extends Component {
         const repliesComponent = this.getRepliesComponent(this.props.question.type);
         return (
             <div className="mainContainer">
-                <p className="questionContent">{this.props.question.content}</p>
+                <div className="questionContainer">
+                    <p className="questionContent">{this.props.question.content}</p>
+                </div>
                 {repliesComponent}
             </div>
         )

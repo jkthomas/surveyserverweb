@@ -39,11 +39,11 @@ class RadioReply extends Component {
         const currentlyPickedOption = this.state.pickedOptionId;
         const replies = this.props.replies.map((reply) => {
             return ([
-                <div className="flexOption">
-                    <input className="optionInput" key={reply.id} type="radio" value={reply.id}
+                <div className="flexFormContainer">
+                    <input className="pickInput" key={reply.id} type="radio" value={reply.id}
                            checked={currentlyPickedOption === reply.id.toString()}
                            onChange={event => this.handleChange(event, reply.content)}/>
-                    <label className="optionLabel" key='content'>{reply.content}</label>
+                    <label className="inputLabel" key='content'>{reply.content}</label>
                 </div>,
                 <br key='breakline'/>
             ])

@@ -32,7 +32,7 @@ class OpenReply extends Component {
 
     render() {
         return (
-            <form className="flexForm" onSubmit={this.handleSubmit} onChange={event => this.handleChange(event)}>
+            <form className="flexFormContainer" onSubmit={this.handleSubmit} onChange={event => this.handleChange(event)}>
                 <input className="textInput" type="text"/>
                 <input className="submitButton" type="submit"/>
             </form>)
